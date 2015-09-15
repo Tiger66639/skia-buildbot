@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Tiger66639/skia-buildbot.svg)](https://travis-ci.org/Tiger66639/skia-buildbot)
 Skia-Buildbot Repository
 ========================
 
