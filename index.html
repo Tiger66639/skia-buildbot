@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Skia-buildbot by Tiger66639</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Tiger66639/skia-buildbot">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/Tiger66639/skia-buildbot/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/Tiger66639/skia-buildbot/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Skia-buildbot</h1>
+          <p>paper-material</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Tiger66639">Tiger66639</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <p><a href="https://travis-ci.org/Tiger66639/skia-buildbot"><img src="https://travis-ci.org/Tiger66639/skia-buildbot.svg" alt="Build Status"></a></p>
+
+<h1>
+<a id="skia-buildbot-repository" class="anchor" href="#skia-buildbot-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>Skia-Buildbot Repository</h1>
+
+<p>This repo contains infrastructure code for Skia.</p>
+
+<h1>
+<a id="getting-the-source-code" class="anchor" href="#getting-the-source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting the Source Code</h1>
+
+<p>The main source code repository is a Git repository hosted at
+<a href="https://skia.googlesource.com/buildbot">https://skia.googlesource.com/buildbot</a>. Although it is possible to check out
+this repository directly with git clone or using gclient fetch, it is preferred to use go get so
+that the code is arranged correctly for Go. If this is your first time working on Go code, read
+about <a href="https://golang.org/doc/code.html#GOPATH">the GOPATH environment variable</a>. Make sure that
+$GOPATH/bin comes before /usr/bin in your PATH. If you have GOPATH set, run:</p>
+
+<pre><code>$ go get -u go.skia.org/infra/...
+$ cd $GOPATH/src/go.skia.org/infra/
+</code></pre>
+
+<p>This fetches the repository into your $GOPATH directory along with all the
+Go dependencies.
+Note: go.skia.org is a custom import path and will only work if used like the examples
+<a href="http://golang.org/cmd/go/#hdr-Remote_import_paths">here</a>.</p>
+
+<p>Install <a href="http://www.chromium.org/developers/how-tos/install-depot-tools">depot_tools</a>. You can learn
+more about using depot_tools from the
+<a href="http://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html">tutorial</a>.
+Then run:</p>
+
+<pre><code>$ gclient config --name . --unmanaged https://skia.googlesource.com/buildbot
+$ gclient sync
+</code></pre>
+
+<p>This fetches additional dependencies specified by the DEPS file.</p>
+
+<h1>
+<a id="database-setup-for-testing" class="anchor" href="#database-setup-for-testing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Database Setup for Testing</h1>
+
+<p>Tests which use the database package's testutils require you to have a MySQL instance running with a
+database named "sk_testing" and users called "readwrite" and "test_root" with appropriate
+permissions for sk_testing. The 'setup_test_db' script in 'go/database' is included for convenience
+in setting up this test database and user.</p>
+
+<p>Go tests require a local installation of MySQL. For a Debian based distro:</p>
+
+<pre><code>$ sudo apt-get install mysql-client mysql-server
+</code></pre>
+
+<p>Leave the root password blank.</p>
+
+<p>Then, to set up local versions of the production databases:</p>
+
+<pre><code>$ cd go/database
+$ ./setup_test_db
+</code></pre>
+
+<h1>
+<a id="running-unit-tests" class="anchor" href="#running-unit-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running unit tests</h1>
+
+<p>Install <a href="https://cloud.google.com/sdk/">Cloud SDK</a>.</p>
+
+<p>Install other dependencies:</p>
+
+<pre><code>$ sudo apt-get install npm nodejs-legacy python-django redis-server
+$ go get github.com/kisielk/errcheck
+$ go get golang.org/x/tools/cmd/goimports
+</code></pre>
+
+<p>Build from GOPATH:</p>
+
+<pre><code>cd $GOPATH/src/go.skia.org/infra/
+make all
+</code></pre>
+
+<p>Use this command to run the presubmit tests:</p>
+
+<pre><code>$ ./run_unittests --short
+</code></pre>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
